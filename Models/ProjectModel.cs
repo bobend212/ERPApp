@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,6 +18,7 @@ namespace ERPApp.Models
         [Required]
         public ProjectType Type { get; set; }
         [Required]
+        [Column(TypeName = "Date")]
         public DateTime DateAdded { get; set; }
 
     }
