@@ -25,6 +25,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="3.1.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.DataAnnotations" Version="3.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0" />
   </ItemGroup>
 
@@ -33,6 +34,15 @@
     <Content Remove="$(SpaRoot)**" />
     <None Remove="$(SpaRoot)**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200201140646_DateAdded column improved.cs" />
+    <Compile Remove="Migrations\20200201140646_DateAdded column improved.Designer.cs" />
+    <Compile Remove="Migrations\20200201144558_dateadded column nullable.cs" />
+    <Compile Remove="Migrations\20200201144558_dateadded column nullable.Designer.cs" />
+    <Compile Remove="Migrations\20200201144926_dateadded column nonullable.cs" />
+    <Compile Remove="Migrations\20200201144926_dateadded column nonullable.Designer.cs" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

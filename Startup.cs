@@ -86,6 +86,13 @@ namespace ERPApp
                     IssuerSigningKey = new SymmetricSecurityKey(secretKey)
                 };
             });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("LoggedInRequired", policy => policy.RequireRole("Admin", "User", "Leader").RequireAuthenticatedUser());
+
+                options.AddPolicy("AdminRequired", policy => policy.RequireRole("Admin").RequireAuthenticatedUser());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ERPApp.Data;
 using ERPApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,7 @@ namespace ERPApp.Controllers
         }
 
         [HttpGet("[action]")]
+        [Authorize(Policy = "LoggedInRequired")]
         public IActionResult GetProjects()
         {
             var projects = _db.Projects.ToList();
@@ -30,13 +32,15 @@ namespace ERPApp.Controllers
         }
 
         [HttpPost("addproject")]
+        [Authorize(Policy = "AdminRequired")]
         public async Task<IActionResult> AddProject([FromBody] ProjectModel formData)
         {
             var newProj = new ProjectModel
             {
                 Name = formData.Name,
                 Number = formData.Number,
-                Type = formData.Type
+                Type = formData.Type,
+                DateAdded = DateTime.Now
             };
 
             var projects = _db.Projects.Any(x => x.Number == formData.Number);
@@ -49,6 +53,7 @@ namespace ERPApp.Controllers
         }
 
         [HttpPut("updateproject/{id}")]
+        [Authorize(Policy = "AdminRequired")]
         public async Task<IActionResult> UpdateProject([FromRoute] int id, [FromBody] ProjectModel formData)
         {
             if (!ModelState.IsValid)
@@ -70,6 +75,7 @@ namespace ERPApp.Controllers
         }
 
         [HttpDelete("deleteproject/{id}")]
+        [Authorize(Policy = "AdminRequired")]
         public async Task<IActionResult> DeleteProject([FromRoute] int id)
         {
             if (!ModelState.IsValid)
@@ -83,11 +89,7 @@ namespace ERPApp.Controllers
             await _db.SaveChangesAsync();
 
             return Ok(new JsonResult($"Project with id: {id} was DELETED."));
-
         }
-
-
-
 
     }
 }

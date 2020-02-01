@@ -45,7 +45,7 @@ namespace ERPApp.Controllers
             if(result.Succeeded)
             {
                 //create new user and assign default role
-                await _userManager.AddToRoleAsync(user, "User");
+                await _userManager.AddToRoleAsync(user, "Admin");
                 //here I can add sending confirmation email method
                 return Ok(new { username = user.UserName, email = user.Email, status = 1, message = "Registration successfull" });
             }
