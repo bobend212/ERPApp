@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { AccountService } from '../services/account.service';
 
 @Component({
   selector: 'app-login',
@@ -8,9 +9,14 @@ import { FormControl } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  private getLoginStatus: boolean;
+
+  constructor(private account: AccountService) { }
 
   ngOnInit() {
+
+    //this.getLoginStatus = this.account.
+
   }
 
 }
